@@ -203,8 +203,11 @@ void Controller::updateFoodPosition(int x, int y, std::function<void()> clearPol
 void Controller::handleFoodInd(std::unique_ptr<Event> e)
 {
     auto receivedFood = payload<FoodInd>(*e);
+    if(receivedFood.x > 0 && receivedFood.y > 0)
+    {
+        updateFoodPosition(receivedFood.x, receivedFood.y, std::bind(&Controller::sendClearOldFood, this));
+    }
 
-    updateFoodPosition(receivedFood.x, receivedFood.y, std::bind(&Controller::sendClearOldFood, this));
 }
 
 void Controller::handleFoodResp(std::unique_ptr<Event> e)
