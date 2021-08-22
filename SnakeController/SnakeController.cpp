@@ -216,6 +216,9 @@ Controller::Segment Controller::getNewHead() const
 void Controller::receive(std::unique_ptr<Event> e)
 {
     try {
+
+        std::unique_ptr<EventT<TimeoutInd>> tmp = std::make_unique((EventT<TimeoutInd>)e);
+
         handleTimePassed(*dynamic_cast<EventT<TimeoutInd> const&>(*e));
     } catch (std::bad_cast&) {
         try {
