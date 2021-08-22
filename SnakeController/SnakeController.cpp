@@ -84,7 +84,7 @@ void Controller::receive(std::unique_ptr<Event> e)
                 break;
             }
         }
-
+    //test
         if (not lost) {
             if (std::make_pair(newHead.x, newHead.y) == m_foodPosition) {
                 m_scorePort.send(std::make_unique<EventT<ScoreInd>>());
